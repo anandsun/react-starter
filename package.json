@@ -4,31 +4,40 @@
   "description": "A React.JS starter kit",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run webpack\" \"nodemon server/app.js\"",
-    "webpack": "webpack --progress --colors --watch",
-    "wp-server": "webpack-dev-server --content-base 'client' --progress --colors"
+    "start-bsync": "node start.js",
+    "start": "rimraf dist && concurrently \"npm run webpack\" \"nodemon src/server/app.js\"",
+    "bsync": "browser-sync start --proxy 'localhost:3000' --files 'src'",
+    "webpack": "webpack --colors --watch",
+    "postinstall": "rimraf dist && webpack --profile --colors",
+    "test": "jest",
+    "test:watch": "npm test -- --watch"
   },
   "author": "Daniel Wei",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0",
-    "react": "^15.3.1",
-    "react-dom": "^15.3.1",
-    "react-redux": "^4.4.5",
-    "redux": "^3.5.2"
-  },
-  "devDependencies": {
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
-    "concurrently": "^2.2.0",
+    "css-loader": "^0.24.0",
+    "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "html-loader": "^0.4.3",
     "html-webpack-plugin": "^2.22.0",
-    "redux-devtools": "^3.3.1",
-    "webpack": "^1.13.2",
-    "webpack-dev-server": "^1.15.0"
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "rimraf": "^2.5.4",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.2"
+  },
+  "devDependencies": {
+    "babel-jest": "^15.0.0",
+    "browser-sync": "^2.17.3",
+    "concurrently": "^2.2.0",
+    "jest": "^15.1.1",
+    "redux-devtools": "^3.3.1"    
   }
 }

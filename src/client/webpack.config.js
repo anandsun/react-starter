@@ -1,8 +1,9 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  devtool: "cheap-module-eval-source-map",
+  devtool: "eval",
 
   entry: {
     'vendor': __dirname + "/vendor.js", 
@@ -10,7 +11,7 @@ module.exports = {
   },
 
   output: {
-    path: __dirname + '/dist',
+    path: __dirname + '/../../dist',
     filename: "./[name].js"
   },
 
@@ -31,6 +32,10 @@ module.exports = {
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
         loader: 'file?name=assets/[name].[hash].[ext]'
+      },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
       }
     ]
   },
@@ -40,8 +45,9 @@ module.exports = {
       name: ['app', 'vendor']
     }),
     new HtmlWebpackPlugin({
-      template: 'client/index.html'
-    })
+      template: __dirname + '/index.html'
+    }),
+    new ExtractTextPlugin('[name].css')
   ]
 
 };

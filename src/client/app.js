@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import './styles.css';
+
 class HelloWorld extends React.Component {
   render() {
     return (
