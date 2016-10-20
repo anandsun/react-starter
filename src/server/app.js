@@ -1,22 +1,7 @@
 const express = require('express');
-const path = require('path');
 
-const app = express();
+const app = express.Router();
 
-app.set('port', 3000);
-app.set('distdir', path.join(__dirname, '/../../dist'));
+app.get('/test', (req, res) => res.json({test: 'test is a go'}))
 
-app.use('/', express.static(app.get('distdir')));
-
-app.get('*', (req, res) => {
-  if (!path.extname(req.path)) {
-    res.sendFile('index.html', {root: app.get('distdir')});
-  }
-  else {
-    res.status(404).end();
-  }
-});
-
-app.listen(app.get('port'), () => {
-  console.log('Node app running on port', app.get('port'));
-});
+module.exports = app;

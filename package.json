@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start-bsync": "node start.js",
-    "start": "rimraf dist && concurrently \"npm run webpack\" \"nodemon src/server/app.js\"",
+    "start": "rimraf dist && concurrently \"npm run webpack\" \"node src/server.js\"",
     "bsync": "browser-sync start --proxy 'localhost:3000' --files 'src'",
     "webpack": "webpack --colors --watch",
     "postinstall": "rimraf dist && webpack --profile --colors",
@@ -36,8 +36,12 @@
   "devDependencies": {
     "babel-jest": "^15.0.0",
     "browser-sync": "^2.17.3",
+    "chokidar": "^1.6.1",
     "concurrently": "^2.2.0",
     "jest": "^15.1.1",
-    "redux-devtools": "^3.3.1"    
+    "react-hot-loader": "^3.0.0-beta.6",
+    "redux-devtools": "^3.3.1",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-hot-middleware": "^2.13.0"
   }
 }
