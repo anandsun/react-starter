@@ -30,21 +30,16 @@ class Pokémon extends React.Component {
   render() {
     return (
       <div>
-<<<<<<< HEAD
         <p>Pokémon:</p>
         <input type="text" onChange={this.handleChange} />
         <br />
         <button onClick={this.handleSubmit}>Submit</button>
         {this.displayName()}
-=======
-        Hello World! How are you? I am fine. Thank you
->>>>>>> origin/master
       </div>
     );
   }
 }
 
-<<<<<<< HEAD
 function name_par(name) {
   return (
     <p id="name">
@@ -54,10 +49,3 @@ function name_par(name) {
 }
 
 ReactDOM.render(<Pokémon />, document.getElementById('content'));
-=======
-ReactDOM.render(<HelloWorld />, document.getElementById('content'));
-
-if (module.hot) {
-  module.hot.accept();
-}
->>>>>>> origin/master
