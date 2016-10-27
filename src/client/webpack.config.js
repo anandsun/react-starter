@@ -6,24 +6,28 @@ module.exports = {
   devtool: "eval",
 
   entry: {
-    'vendor': __dirname + "/vendor.js", 
-    'app': __dirname + "/app.js"
+    vendor: [__dirname + "/vendor.js", 'webpack-hot-middleware/client', 'webpack/hot/dev-server'], 
+    app: [__dirname + "/app.js", 'webpack-hot-middleware/client', 'webpack/hot/dev-server']
   },
 
   output: {
-    path: __dirname + '/../../dist',
-    filename: "./[name].js"
+    //path: __dirname + '/../../dist',
+    path: '/',
+    publicPath: 'http://localhost:3000/',
+    filename: "[name].js"
   },
 
   module: {
     loaders: [
       {
         test: /.jsx?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react']
-        }
+        loaders: ['react-hot-loader/webpack', 'babel?' + JSON.stringify({
+           presets: ['es2015', 'react']
+         })],
+        exclude: /node_modules/
+        // query: {
+        //   presets: ['es2015', 'react']
+        // }
       },
       {
         test: /\.html$/,
@@ -35,12 +39,20 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
+        loader: "style-loader!css-loader"
       }
     ]
   },
 
   plugins: [
+    // webpack-hot-middleware
+    // Webpack 1.0
+    new webpack.optimize.OccurenceOrderPlugin(),
+    // Webpack 2.0 fixed this mispelling
+    // new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+
     new webpack.optimize.CommonsChunkPlugin({
       name: ['app', 'vendor']
     }),
